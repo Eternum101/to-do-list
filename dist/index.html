@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List Application</title>
+</head>
+<body>
+    <h1 class="title">To Do List</h1>
+
+    <div class="all-tasks">
+        <div class="date-filter">
+            <button class="btn-dates">All Tasks</button>
+            <button class="btn-dates">Today</button>
+            <button class="btn-dates">This Week</button>
+        </div>
+        <h2 class="task-list-title">Projects</h2>
+        <ul class="task-list">
+            <li class="list-name active-list">Youtube</li>
+            <li class="list-name">Work</li>
+            <li class="list-name">Grocery</li>
+        </ul>
+        
+        <form action="">
+            <input type="text" class="new-input project" 
+            placeholder="New Project Name" 
+            aria-label="New Project Name">
+            <button class="btn create">+</button>
+        </form>
+    </div>
+
+    <div class="todo-list">
+        <div class="todo-header">
+            <h2 class="list-title">Youtube</h2>
+            <p class="task-count">3 Tasks Remaining</p>
+        </div>
+
+        <div class="todo-body">
+            <div class="tasks">
+                <div class="task">
+                    <input type="checkbox" id="task-1">
+                    <label for="task-1">
+                        <span class="custom-checkbox"></span>
+                        Record</label>
+                </div>
+                <div class="task">
+                    <input type="checkbox" id="task-2">
+                    <label for="task-2">
+                        <span class="custom-checkbox"></span>
+                        Edit</label>
+                </div>
+                <div class="task">
+                    <input type="checkbox" id="task-3">
+                    <label for="task-3">
+                        <span class="custom-checkbox"></span>
+                        Review</label>
+                </div>
+            </div>
+            <div class="new-task-creator">
+                <form action="">
+                    <input type="text" class="new-input task" 
+                    placeholder="New Task Name" 
+                    aria-label="New Task Name">
+                    <button class="btn create">+</button>
+                </form>
+            </div>
+            <div class="delete-task">
+                <button class="btn delete">Clear Completed Tasks</button>
+                <button class="btn delete">Delete Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+</html>
