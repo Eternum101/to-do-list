@@ -3,7 +3,7 @@
 
 :root {
     --bg-primary: #fff;
-    --bg-secondary: #D1D1D7;
+    --bg-secondary: #272727;
     --bg-all-tasks: #E4E4E7;
     --bg-accent: #4949E9;
 }
@@ -28,13 +28,23 @@ body {
     
 }
 
+.material-symbols-outlined.icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: calc(1.5vw + 2rem);
+}
+
 .title {
+    display: flex;
     grid-area: header;
     text-align: left;
-    font-size: calc(2vw + 2rem);
+    font-size: calc(1.5vw + 2rem);
     background-color: var(--bg-secondary);
-    padding: 5px;
+    padding: 15px;
     padding-left: 20px;
+    color: white;
 }
 
 .all-tasks {
@@ -42,6 +52,13 @@ body {
     background-color: var(--bg-all-tasks);
     padding-left: 30px;
     height: 100vh;
+}
+
+.material-symbols-outlined.date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
 }
 
 .date-filter {
@@ -55,22 +72,41 @@ body {
 }
 
 .btn-dates {
+    display: flex;
+    gap: 10px;
     cursor: pointer;
     background: 0;
     border: 0;
     color: inherit;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+}
+
+.btn-dates:hover {
+    background-color: #ccc;
+}
+
+.task-list-title {
+    font-size: 1.8rem;
 }
 
 .task-list {
     font-size: 1.2rem;
     line-height: 1.7;
-    list-style: circle;
+    list-style: none;
     padding-left: 25px;
     margin-top: 15px;
 }
 
+.material-symbols-outlined.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+}
+
 .list-name {
+    display: flex;
+    gap: 3px;
     cursor: pointer;
 }
 
@@ -106,20 +142,21 @@ form {
     background-color: transparent;
     border: 0;
     color: inherit;
-    border-bottom: 1px solid currentColor;
+    border-bottom: 1px solid var(--bg-accent);
     font-size: 1.1rem;
     outline: none;
+    padding: 0.25em;
 
     transition: border-bottom 150ms ease-in;
     order:  2;
 }
 
 .new-input:focus {
-    border-bottom-width: 3px;
+    border-bottom-width: 2.5px;
 }
 
 .new-input:focus::placeholder {
-    opacity: 0.2;
+    opacity: 0.4;
 }
 
 .new-input.list {
@@ -162,6 +199,12 @@ form {
 
 .todo-body {
     padding: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.new-task-creator .create {
+    color: var(--bg-accent);
 }
 
 [type="checkbox"] {
@@ -235,5 +278,29 @@ form {
     transform-origin: left;
 }
 
+.delete-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 300px;
+    margin-left: 15px;
+}
+
+.btn.delete {
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: var(--bg-accent);
+    color: white;
+    padding: 5px;
+    height: 60px;
+    font-size: 1.1rem;
+    width: 230px;
+    transition: opacity 200ms;
+}
+
+.btn.delete:hover {
+    opacity: 0.9;
+}
 
 
