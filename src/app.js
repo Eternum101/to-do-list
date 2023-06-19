@@ -117,8 +117,8 @@ function renderTasks(selectedList) {
 
 function renderTaskCount(selectedList) {
     const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length;
-    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
-    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
+    const taskString = incompleteTaskCount === 1 ? "Task" : "Tasks";
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} Remaining`;
 }
 
 function renderLists() {
@@ -126,7 +126,11 @@ function renderLists() {
         const listElement = document.createElement('li');
         listElement.dataset.listId = list.id; 
         listElement.classList.add("list-name");
-        listElement.innerText = list.name;
+        const listSpan = document.createElement('span');
+        listSpan.setAttribute('class', 'material-symbols-outlined list');
+        listSpan.innerText = 'playlist_add';
+        listElement.appendChild(listSpan); 
+        listElement.appendChild(document.createTextNode(list.name));
         if (list.id === selectedListID) {
             listElement.classList.add('active-list'); 
         }
