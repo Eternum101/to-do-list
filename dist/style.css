@@ -245,6 +245,8 @@ form {
 }
 
 .task {
+    display: flex;
+    justify-content: space-between;
     position: relative;
     margin-bottom: 1.5em;
 }
@@ -302,6 +304,27 @@ form {
 [type="checkbox"]:checked + label::after {
     transform: scaleX(1);
     transform-origin: left;
+}
+
+.due-date {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+.label-due-date {
+    font-size: 1.1rem !important;
+}
+
+.input-due-date {
+    height: 25px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.input-due-date:hover {
+    border: 2px solid var(--bg-accent);
 }
 
 .delete-task {

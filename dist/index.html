@@ -15,7 +15,7 @@
 
     <div class="all-tasks">
         <div class="date-filter">
-            <button class="btn-dates"> <span class="material-symbols-outlined date all">
+            <button class="btn-dates" data-all-tasks-button> <span class="material-symbols-outlined date all">
                 list_alt
                 </span>All Tasks</button>
             <button class="btn-dates"> <span class="material-symbols-outlined date today">
@@ -27,8 +27,8 @@
         </div>
         <h2 class="task-list-title">Projects</h2>
         <ul class="task-list" data-projects>
-            <span></span>
         </ul>
+        <span></span>
         
         <form action="" data-new-project-form>
             <input type="text" class="new-input project" 
@@ -45,7 +45,7 @@
         </div>
 
         <div class="todo-body">
-            <div class="tasks" data-tasks></div>
+        <div class="tasks" data-tasks></div>
             <div class="new-task-creator">
                 <form action="" data-new-task-form>
                     <input type="text" class="new-input task" 
@@ -66,6 +66,10 @@
             <label>
                 <span class="custom-checkbox"></span>
             </label>
+            <div class="due-date">
+                <label class="label-due-date">Due Date:</label>
+                <input type="date" class="input-due-date">
+              </div>
         </div>
     </template>
     <script src="./main.js"></script>

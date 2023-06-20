@@ -1,8 +1,6 @@
-const createProjects = () => {
-
 const projectsContainer = document.querySelector('[data-projects]');
-const newProjectForm = document.querySelector('[data-new-project-form');
-const newProjectInput = document.querySelector('[data-new-project-input');
+const newProjectForm = document.querySelector('[data-new-project-form]');
+const newProjectInput = document.querySelector('[data-new-project-input]');
 const deleteListButton = document.querySelector('[data-delete-list-button]');
 const listDisplayContainer = document.querySelector('[data-list-display-container]');
 const listTitleElement = document.querySelector('[data-list-title]');
@@ -12,6 +10,9 @@ const taskTemplate = document.getElementById('task-template');
 const newTaskForm = document.querySelector('[data-new-task-form]');
 const newTaskInput = document.querySelector('[data-new-task-input]');
 const clearCompleteTasksButton = document.querySelector('[data-clear-complete-button]');
+const allTasksButton = document.querySelector('[data-all-tasks-button]');
+
+const createProjects = () => {
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListID';
@@ -68,12 +69,58 @@ newTaskForm.addEventListener('submit', e => {
     saveAndRender();
 });
 
+function displayAllTasks() {
+    clearElement(tasksContainer);
+    
+    projects.forEach(project => {
+      project.tasks.forEach(task => {
+        const taskElement = document.importNode(taskTemplate.content, true);
+        const checkbox = taskElement.querySelector('input');
+        checkbox.id = task.id;
+        checkbox.checked = task.complete;
+        const label = taskElement.querySelector('label');
+        label.htmlFor = task.id;
+        label.append(task.name);
+  
+        const dueDateInput = taskElement.querySelector('.input-due-date');
+        dueDateInput.value = task.dueDate;
+  
+        handleDateSelection(task, dueDateInput);
+  
+        tasksContainer.appendChild(taskElement);
+      });
+    });
+  
+    // Deselect the currently selected project
+    const selectedListElement = projectsContainer.querySelector('.active-list');
+    if (selectedListElement) {
+      selectedListElement.classList.remove('active-list');
+    }
+    selectedListID = null;
+  
+    listTitleElement.innerText = 'All Tasks';
+    listCountElement.innerText = ''; // Clear the task count
+  
+    listDisplayContainer.style.display = ''; // Show the list display container
+  }
+  
+  
+  allTasksButton.addEventListener('click', displayAllTasks);
+
 function createProject(name) {
     return { id: Date.now().toString(), name: name, tasks: [] }
 };
 
 function createTask(name) {
-    return { id: Date.now().toString(), name: name, complete: false }
+    return { id: Date.now().toString(), name: name, complete: false ,dueDate: null}; 
+}
+
+function handleDateSelection(task, dueDateInput) {
+    dueDateInput.addEventListener('input', function(event) {
+        const selectedDate = event.target.value;
+        task.dueDate = selectedDate;
+        saveAndRender();
+      });
 }
 
 function saveAndRender() {
@@ -111,6 +158,12 @@ function renderTasks(selectedList) {
         const label = taskElement.querySelector('label');
         label.htmlFor = task.id;
         label.append(task.name);
+
+        const dueDateInput = taskElement.querySelector('.input-due-date');
+        dueDateInput.value = task.dueDate;
+
+        handleDateSelection(task, dueDateInput);
+
         tasksContainer.appendChild(taskElement);
     });
 }
