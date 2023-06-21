@@ -70,40 +70,47 @@ newTaskForm.addEventListener('submit', e => {
 });
 
 function displayAllTasks() {
-    clearElement(tasksContainer);
-    
-    projects.forEach(project => {
-      project.tasks.forEach(task => {
-        const taskElement = document.importNode(taskTemplate.content, true);
-        const checkbox = taskElement.querySelector('input');
-        checkbox.id = task.id;
-        checkbox.checked = task.complete;
-        const label = taskElement.querySelector('label');
-        label.htmlFor = task.id;
-        label.append(task.name);
-  
-        const dueDateInput = taskElement.querySelector('.input-due-date');
-        dueDateInput.value = task.dueDate;
-  
-        handleDateSelection(task, dueDateInput);
-  
-        tasksContainer.appendChild(taskElement);
+  clearElement(tasksContainer);
+
+  projects.forEach((project) => {
+    project.tasks.forEach((task) => {
+      const taskElement = document.importNode(taskTemplate.content, true);
+      const checkbox = taskElement.querySelector('input');
+      checkbox.id = task.id;
+      checkbox.checked = task.complete;
+      const label = taskElement.querySelector('label');
+      label.htmlFor = task.id;
+      label.append(task.name);
+
+      const dueDateInput = taskElement.querySelector('.input-due-date');
+      dueDateInput.value = task.dueDate;
+
+      handleDateSelection(task, dueDateInput);
+
+      checkbox.addEventListener('click', (e) => {
+        const selectedTask = projects
+          .flatMap((project) => project.tasks)
+          .find((t) => t.id === e.target.id);
+        selectedTask.complete = e.target.checked;
+        save();
+        renderTaskCount();
       });
+
+      tasksContainer.appendChild(taskElement);
     });
-  
-    // Deselect the currently selected project
-    const selectedListElement = projectsContainer.querySelector('.active-list');
-    if (selectedListElement) {
-      selectedListElement.classList.remove('active-list');
-    }
-    selectedListID = null;
-  
-    listTitleElement.innerText = 'All Tasks';
-    listCountElement.innerText = ''; // Clear the task count
-  
-    listDisplayContainer.style.display = ''; // Show the list display container
+  });
+
+  const selectedListElement = projectsContainer.querySelector('.active-list');
+  if (selectedListElement) {
+    selectedListElement.classList.remove('active-list');
+    allTasksButton.classList.add('btn-active');
   }
-  
+
+  listTitleElement.innerText = 'All Tasks';
+  listCountElement.innerText = '';
+
+  listDisplayContainer.style.display = '';
+}
   
   allTasksButton.addEventListener('click', displayAllTasks);
 
@@ -186,6 +193,7 @@ function renderLists() {
         listElement.appendChild(document.createTextNode(list.name));
         if (list.id === selectedListID) {
             listElement.classList.add('active-list'); 
+            allTasksButton.classList.remove('btn-active');
         }
         projectsContainer.appendChild(listElement);
     });

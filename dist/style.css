@@ -101,6 +101,10 @@ body {
    border: 2px solid var(--bg-accent); 
 }
 
+.btn-active {
+    border-color: var(--bg-accent);
+}
+
 .task-list-title {
     font-size: 1.3rem;
 }
