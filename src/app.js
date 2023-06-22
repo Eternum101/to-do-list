@@ -1,3 +1,5 @@
+import { isSameDay, startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
+
 const projectsContainer = document.querySelector('[data-projects]');
 const newProjectForm = document.querySelector('[data-new-project-form]');
 const newProjectInput = document.querySelector('[data-new-project-input]');
@@ -11,6 +13,8 @@ const newTaskForm = document.querySelector('[data-new-task-form]');
 const newTaskInput = document.querySelector('[data-new-task-input]');
 const clearCompleteTasksButton = document.querySelector('[data-clear-complete-button]');
 const allTasksButton = document.querySelector('[data-all-tasks-button]');
+const todayButton = document.querySelector('[data-today-button]');
+const thisWeekButton = document.querySelector('[data-this-week-button]');
 
 const createProjects = () => {
 
@@ -69,6 +73,27 @@ newTaskForm.addEventListener('submit', e => {
     saveAndRender();
 });
 
+allTasksButton.addEventListener('click', () => {
+    displayAllTasks();
+    todayButton.classList.remove('btn-active');
+    thisWeekButton.classList.remove('btn-active');
+    allTasksButton.classList.add('btn-active');
+});
+
+todayButton.addEventListener('click', () => {
+    filterTodayTasks();
+    allTasksButton.classList.remove('btn-active');
+    thisWeekButton.classList.remove('btn-active'); 
+    todayButton.classList.add('btn-active');
+});
+
+thisWeekButton.addEventListener('click', () => {
+    filterThisWeekTasks();
+    allTasksButton.classList.remove('btn-active');
+    todayButton.classList.remove('btn-active');
+    thisWeekButton.classList.add('btn-active');
+});
+
 function displayAllTasks() {
   clearElement(tasksContainer);
 
@@ -103,7 +128,6 @@ function displayAllTasks() {
   const selectedListElement = projectsContainer.querySelector('.active-list');
   if (selectedListElement) {
     selectedListElement.classList.remove('active-list');
-    allTasksButton.classList.add('btn-active');
   }
 
   listTitleElement.innerText = 'All Tasks';
@@ -111,8 +135,79 @@ function displayAllTasks() {
 
   listDisplayContainer.style.display = '';
 }
+
+  function filterTodayTasks() {
+    const today = new Date();
+    clearElement(tasksContainer);
   
-  allTasksButton.addEventListener('click', displayAllTasks);
+    projects.forEach((project) => {
+      project.tasks.forEach((task) => {
+        const dueDate = new Date(task.dueDate);
+        if (isSameDay(dueDate, today)) {
+          const taskElement = document.importNode(taskTemplate.content, true);
+          const checkbox = taskElement.querySelector('input');
+          checkbox.id = task.id;
+          checkbox.checked = task.complete;
+          const label = taskElement.querySelector('label');
+          label.htmlFor = task.id;
+          label.append(task.name);
+
+          const dueDateInput = taskElement.querySelector('.input-due-date');
+          dueDateInput.value = task.dueDate;
+  
+          handleDateSelection(task, dueDateInput);
+          
+          tasksContainer.appendChild(taskElement);
+        }
+      });
+    });
+
+    listTitleElement.innerText = 'Today';
+    listCountElement.innerText = '';
+  
+    const selectedListElement = projectsContainer.querySelector('.active-list');
+    if (selectedListElement) {
+      selectedListElement.classList.remove('active-list');
+    }
+}
+
+function filterThisWeekTasks() {
+    const today = new Date();
+    const startOfWeekDate = startOfWeek(today);
+    const endOfWeekDate = endOfWeek(today);
+  
+    clearElement(tasksContainer);
+  
+    projects.forEach((project) => {
+      project.tasks.forEach((task) => {
+        const dueDate = new Date(task.dueDate);
+        if (isWithinInterval(dueDate, { start: startOfWeekDate, end: endOfWeekDate })) {
+          const taskElement = document.importNode(taskTemplate.content, true);
+          const checkbox = taskElement.querySelector('input');
+          checkbox.id = task.id;
+          checkbox.checked = task.complete;
+          const label = taskElement.querySelector('label');
+          label.htmlFor = task.id;
+          label.append(task.name);
+  
+          const dueDateInput = taskElement.querySelector('.input-due-date');
+          dueDateInput.value = task.dueDate;
+  
+          handleDateSelection(task, dueDateInput);
+  
+          tasksContainer.appendChild(taskElement);
+        }
+      });
+    });
+  
+    listTitleElement.innerText = 'This Week';
+    listCountElement.innerText = '';
+  
+    const selectedListElement = projectsContainer.querySelector('.active-list');
+    if (selectedListElement) {
+      selectedListElement.classList.remove('active-list');
+    }
+}
 
 function createProject(name) {
     return { id: Date.now().toString(), name: name, tasks: [] }
@@ -126,7 +221,6 @@ function handleDateSelection(task, dueDateInput) {
     dueDateInput.addEventListener('input', function(event) {
         const selectedDate = event.target.value;
         task.dueDate = selectedDate;
-        saveAndRender();
       });
 }
 
@@ -194,6 +288,7 @@ function renderLists() {
         if (list.id === selectedListID) {
             listElement.classList.add('active-list'); 
             allTasksButton.classList.remove('btn-active');
+            todayButton.classList.remove('btn-active');
         }
         projectsContainer.appendChild(listElement);
     });
