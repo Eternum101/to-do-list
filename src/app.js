@@ -1,5 +1,7 @@
+// Importing date-fns library
 import { isSameDay, startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 
+// Declaring variables
 const projectsContainer = document.querySelector('[data-projects]');
 const newProjectForm = document.querySelector('[data-new-project-form]');
 const newProjectInput = document.querySelector('[data-new-project-input]');
@@ -25,6 +27,7 @@ const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListID';
 let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
 
+// Event listeners
 projectsContainer.addEventListener('click', (e) => {
   if (e.target.tagName.toLowerCase() === 'li') {
     selectedListID = e.target.dataset.listId;
@@ -101,6 +104,8 @@ thisWeekButton.addEventListener('click', () => {
     thisWeekButton.classList.add('btn-active');
 });
 
+// Clears tasksContainer, iterates through projects and tasks to display them, 
+// sets event listeners for checkboxes, updates list title, count, and display settings
 function displayAllTasks() {
   clearElement(tasksContainer);
 
@@ -145,7 +150,10 @@ function displayAllTasks() {
   listDisplayContainer.style.display = '';
 }
 
-  function filterTodayTasks() {
+// Clears tasksContainer, iterates through projects and tasks to display tasks due today,
+// updates list title, count, and display settings, and removes active-list class 
+// from selectedListElement if exists
+function filterTodayTasks() {
     const today = new Date();
     clearElement(tasksContainer);
   
@@ -182,6 +190,9 @@ function displayAllTasks() {
     }
 }
 
+// Clears tasksContainer, calculates the start and end dates of the current week,
+// iterates through projects and tasks to display tasks within the week interval,
+// updates list title, count, and display settings, and removes active-list class from selectedListElement if exists
 function filterThisWeekTasks() {
     const today = new Date();
     const startOfWeekDate = startOfWeek(today);
@@ -222,14 +233,20 @@ function filterThisWeekTasks() {
     }
 }
 
+// Creates and returns a new project object with a unique ID based on the current timestamp, 
+// given a name and an empty tasks array
 function createProject(name) {
     return { id: Date.now().toString(), name: name, tasks: [] }
 };
 
+// Creates and returns a new task object with a unique ID based on the current 
+// timestamp, given a name, initial completion status as false, and a null dueDate
 function createTask(name) {
     return { id: Date.now().toString(), name: name, complete: false ,dueDate: null}; 
 }
 
+// Sets up an event listener for the input element of the dueDate, and updates the 
+// task's dueDate property with the selected date
 function handleDateSelection(task, dueDateInput) {
     dueDateInput.addEventListener('input', function(event) {
         const selectedDate = event.target.value;
@@ -237,16 +254,23 @@ function handleDateSelection(task, dueDateInput) {
       });
 }
 
+// Calls the save() function to save data and the render() function to update the display
 function saveAndRender() {
     save();
     render();
 }
 
+// Saves the projects data and the selectedListID to the localStorage using JSON.stringify()
 function save() {
     localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(projects));
     localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListID);
 }
 
+
+// Clears projectsContainer, renders the lists, determines the selectedList 
+// based on selectedListID, updates the list display settings and title, 
+// renders the task count and tasks for the selected list, sets the display settings 
+// for newTaskForm and displayButtons 
 function render() {
     clearElement(projectsContainer);
     renderLists();
@@ -265,6 +289,10 @@ function render() {
     }
 };
 
+// Renders tasks for the selected list by iterating through each task, 
+// creating task elements, setting checkbox properties and labels,
+// setting due date input value, setting up date selection handling,
+// and appending task elements to the tasksContainer
 function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate.content, true);
@@ -284,12 +312,18 @@ function renderTasks(selectedList) {
     });
 }
 
+// Renders the task count for the selected list by filtering incomplete tasks,
+// getting the count, and updating the listCountElement with the count and appropriate string
 function renderTaskCount(selectedList) {
     const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length;
     const taskString = incompleteTaskCount === 1 ? "Task" : "Tasks";
     listCountElement.innerText = `${incompleteTaskCount} ${taskString} Remaining`;
 }
 
+// Renders the lists by iterating through each project,
+// creating list elements, setting dataset list ID, class, and content,
+// adding list elements to the projectsContainer,
+// adding active class to the selected list element, and updating button states
 function renderLists() {
     projects.forEach(list => {
         const listElement = document.createElement('li');
@@ -310,14 +344,17 @@ function renderLists() {
     });
 }
 
+// Clears the contents of the specified element by removing all its child nodes
 function clearElement(element) {
     while (element.firstChild) {
         element.removeChild(element.firstChild); 
     }
 };
 
+// Calls the render function
 render();
 
 };
 
+// Exports createProjects
 export default createProjects;

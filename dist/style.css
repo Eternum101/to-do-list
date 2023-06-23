@@ -24,9 +24,11 @@ body {
     grid: 
     "header header header header" auto
     "lists lists active ......" auto /
-    1fr minmax(100px, 300px) minmax(250px, 100vw) 1fr;   
+    1fr minmax(100px, 300px) minmax(250px, 100vw) 1fr;
 }
 
+
+/* Button Filter Styling */
 .material-symbols-outlined.icon {
     display: inline-flex;
     justify-content: center;
@@ -172,6 +174,7 @@ form {
     opacity: 0.7;
 }
 
+/* Input Styling */
 .new-input {
     background-color: transparent;
     border: 0;
@@ -207,6 +210,7 @@ form {
     color: white;
 }
 
+/* To-Do Header Styling */ 
 .todo-list {
     grid-area: active;
     display: flex;
@@ -241,6 +245,7 @@ form {
     margin: 0 1em 0 0;
 }
 
+/* To-Do Tasks Styling */
 .todo-body {
     padding: 20px;
     position: relative;
@@ -340,6 +345,7 @@ form {
     padding: 5px;
     border-radius: 5px;
     border: 2px solid black;
+    transition: border 200ms;
 }
 
 .input-due-date:hover {
@@ -369,4 +375,30 @@ form {
     opacity: 0.9;
 }
 
+/* Footer Styling */
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    background-color: #2E2E2E;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
 
+/* Font Awesome Styling */
+.fa-github {
+    color: white;
+    font-size: 25px;
+    padding-left: 10px;
+    transition: transform 250ms;
+}
+
+.fa-github:hover {
+    transform: translateY(-10px);
+}

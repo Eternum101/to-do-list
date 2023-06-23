@@ -9,10 +9,12 @@
     <title>To Do List Application</title>
 </head>
 <body>
+    <!-- Header -->
     <h1 class="title"><span class="material-symbols-outlined icon">
         fact_check
         </span>To Do List</h1>
 
+    <!-- Button Filter Section -->    
     <div class="all-tasks">
         <div class="date-filter">
             <button class="btn-dates" data-all-tasks-button> <span class="material-symbols-outlined date all">
@@ -25,11 +27,12 @@
                 date_range
                 </span>This Week</button>
         </div>
+        
+        <!-- Projects Section -->
         <h2 class="task-list-title">Projects</h2>
         <ul class="task-list" data-projects>
         </ul>
         <span></span>
-        
         <form action="" data-new-project-form>
             <input type="text" class="new-input project" 
             placeholder="New Project Name" 
@@ -38,12 +41,14 @@
         </form>
     </div>
 
+    <!-- To-Do Header Section -->
     <div class="todo-list" data-list-display-container>
         <div class="todo-header">
             <h2 class="list-title" data-list-title>No Tasks<span> (Add a Project)</span></h2>
             <p class="task-count" data-list-count>0 Tasks Remaining</p>
         </div>
 
+    <!-- To-Do Tasks Section-->
         <div class="todo-body">
         <div class="tasks" data-tasks></div>
             <div class="new-task-creator">
@@ -60,6 +65,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Task Template -->
     <template id="task-template">
         <div class="task">
             <input type="checkbox">
@@ -73,5 +80,14 @@
         </div>
     </template>
     <script src="./main.js"></script>
+    <!--Footer Section-->
+<footer>
+    <p>Copyright @ 
+        <script>document.write(new Date().getFullYear())</script> 
+    Eternum101</p>
+    <a href="https://github.com/Eternum101" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+    </a>
+</footer>
 </body>
 </html>
