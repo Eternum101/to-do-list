@@ -3,7 +3,7 @@
 
 :root {
     --bg-primary: #fff;
-    --bg-secondary: #272727;
+    --bg-secondary: #363636;
     --bg-all-tasks: #E4E4E7;
     --bg-accent: #4949E9;
     --bg-accent-2: #EDEDED;
@@ -16,9 +16,9 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
     background-color: var(--bg-primary);
+    font-family: 'Poppins', sans-serif;
 
     display: grid;
     grid: 
@@ -77,9 +77,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 25px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 25px;
     cursor: pointer;
 }
 
@@ -90,19 +90,25 @@ body {
     background: 0;
     border: 2px solid transparent;
     color: inherit;
-    font-size: 1.3rem;
-    background-color: var(--bg-accent-2);
+    font-size: 1.1rem;
     border-radius: 5px;
-    padding: 12px 20px;
+    padding: 10px 20px;
     width: 90%;
+    transition: background-color 200ms;
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn-dates:hover {
-   border: 2px solid var(--bg-accent); 
+   background-color: #EDEDED;
 }
 
 .btn-active {
-    border-color: var(--bg-accent);
+    border-left: solid 3px var(--bg-accent);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    font-weight: 600;
+    background-color: #EDEDED;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .task-list-title {
@@ -135,6 +141,7 @@ body {
     margin-bottom: 10px;
     width: 90%;
     font-size: 1.1rem;
+    transition: opacity 200ms;
 }
 
 .list-name:hover {
@@ -213,7 +220,12 @@ form {
     color: white;
     width: 100%;
     padding: 25px;
-    justify-content: space-between;
+    justify-content: space-between;  
+}
+
+.todo-header span {
+    font-size: 1.2rem;
+    margin-top: 5px;
 }
 
 .task-count {
@@ -223,6 +235,9 @@ form {
 }
 
 .list-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin: 0 1em 0 0;
 }
 
@@ -343,11 +358,11 @@ form {
     border-radius: 5px;
     background-color: var(--bg-accent);
     color: white;
-    padding: 5px;
-    height: 60px;
-    font-size: 1.1rem;
-    width: 230px;
+    height: 50px;
+    font-size: 1rem;
+    width: 220px;
     transition: opacity 200ms;
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn.delete:hover {

@@ -15,6 +15,8 @@ const clearCompleteTasksButton = document.querySelector('[data-clear-complete-bu
 const allTasksButton = document.querySelector('[data-all-tasks-button]');
 const todayButton = document.querySelector('[data-today-button]');
 const thisWeekButton = document.querySelector('[data-this-week-button]');
+const displayButtons = document.querySelector('[data-delete-task]');
+const displayForm = document.querySelector('[data-new-task-form');
 
 const createProjects = () => {
 
@@ -23,22 +25,27 @@ const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListID';
 let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
 
-projectsContainer.addEventListener('click', e => {
-    if (e.target.tagName.toLowerCase() === 'li') {
-        selectedListID = e.target.dataset.listId;
-        saveAndRender(); 
-    }
+projectsContainer.addEventListener('click', (e) => {
+  if (e.target.tagName.toLowerCase() === 'li') {
+    selectedListID = e.target.dataset.listId;
+    saveAndRender();
+  }
 });
 
-tasksContainer.addEventListener('click', e => {
-    if (e.target.tagName.toLowerCase() === 'input') {
-        const selectedList = projects.find(list => list.id === selectedListID);
-        const selectedTask = selectedList.tasks.find(task => task.id === e.target.id);
-        selectedTask.complete = e.target.checked;
-        save();
-        renderTaskCount(selectedList);
+tasksContainer.addEventListener('click', (e) => {
+  if (e.target.tagName.toLowerCase() === 'input') {
+    const selectedList = projects.find((list) => list.id === selectedListID);
+    const selectedTask = selectedList.tasks.find((task) => task.id === e.target.id);
+    selectedTask.complete = e.target.checked;
+    save();
+
+    if (!allTasksButton.classList.contains('btn-active') &&
+        !todayButton.classList.contains('btn-active') &&
+        !thisWeekButton.classList.contains('btn-active')) {
+      renderTaskCount(selectedList);
     }
-})
+  }
+});
 
 clearCompleteTasksButton.addEventListener('click', e => {
     const selectedList = projects.find(list => list.id === selectedListID);
@@ -132,6 +139,8 @@ function displayAllTasks() {
 
   listTitleElement.innerText = 'All Tasks';
   listCountElement.innerText = '';
+  displayButtons.style.display = 'none';
+  displayForm.style.display = 'none';
 
   listDisplayContainer.style.display = '';
 }
@@ -164,6 +173,8 @@ function displayAllTasks() {
 
     listTitleElement.innerText = 'Today';
     listCountElement.innerText = '';
+    displayButtons.style.display = 'none';
+    displayForm.style.display = 'none';
   
     const selectedListElement = projectsContainer.querySelector('.active-list');
     if (selectedListElement) {
@@ -202,6 +213,8 @@ function filterThisWeekTasks() {
   
     listTitleElement.innerText = 'This Week';
     listCountElement.innerText = '';
+    displayButtons.style.display = 'none';
+    displayForm.style.display = 'none';
   
     const selectedListElement = projectsContainer.querySelector('.active-list');
     if (selectedListElement) {
@@ -247,6 +260,8 @@ function render() {
         renderTaskCount(selectedList);
         clearElement(tasksContainer);
         renderTasks(selectedList);
+        newTaskForm.style.display = '';
+        displayButtons.style.display = '';
     }
 };
 
@@ -289,6 +304,7 @@ function renderLists() {
             listElement.classList.add('active-list'); 
             allTasksButton.classList.remove('btn-active');
             todayButton.classList.remove('btn-active');
+            thisWeekButton.classList.remove('btn-active'); 
         }
         projectsContainer.appendChild(listElement);
     });

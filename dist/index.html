@@ -40,21 +40,21 @@
 
     <div class="todo-list" data-list-display-container>
         <div class="todo-header">
-            <h2 class="list-title" data-list-title>No Tasks</h2>
+            <h2 class="list-title" data-list-title>No Tasks<span> (Add a Project)</span></h2>
             <p class="task-count" data-list-count>0 Tasks Remaining</p>
         </div>
 
         <div class="todo-body">
         <div class="tasks" data-tasks></div>
             <div class="new-task-creator">
-                <form action="" data-new-task-form>
+                <form action="" data-new-task-form style="display: none;">
                     <input type="text" class="new-input task" 
                     placeholder="New Task Name" 
                     aria-label="New Task Name" data-new-task-input >
                     <button class="btn create">+</button>
                 </form>
             </div>
-            <div class="delete-task" data-delete-task>
+            <div class="delete-task" data-delete-task style="display: none;">
                 <button class="btn delete" data-clear-complete-button>Clear Completed Tasks</button>
                 <button class="btn delete" data-delete-list-button>Delete Task</button>
             </div>
