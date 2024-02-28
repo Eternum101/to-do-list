@@ -13,17 +13,17 @@ An Advanced Application of a To Do List.
 
 ## Screenshots
 
-### Initial Screen
-![](screenshots/initial-screen-etch-a-sketch.png)
+### All Tasks Filter
+![](screenshots/all-tasks-to-do-list.png)
 
-### Colour Mode
-![](screenshots/colour-mode-etch-a-sketch.png)
+### Todays Tasks Filter
+![](screenshots/todays-tasks-to-do-list.png)
 
-### Rainbow Mode
-![](screenshots/rainbow-mode-etch-a-sketch.png)
+### This Weeks Tasks Filter
+![](screenshots/this-weeks-tasks-to-do-list.png)
 
-### Grid Adjustability
-![](screenshots/grid-adjustability-etch-a-sketch.png)
+### Projects Tasks Filter
+![](screenshots/projects-tasks-to-do-list.png)
 
 [Back to Top](#to-do-list)
 
