@@ -34,14 +34,15 @@ body {
     justify-content: center;
     align-items: center;
     margin-right: 15px;
-    font-size: calc(1.5vw + 2rem);
+    font-size: 2.8rem;
 }
 
 .title {
     display: flex;
     grid-area: header;
+    align-items: center;
     text-align: left;
-    font-size: calc(1.5vw + 2rem);
+    font-size: 2rem;
     background-color: var(--bg-secondary);
     padding: 15px;
     padding-left: 20px;
@@ -243,6 +244,7 @@ form {
     align-items: center;
     gap: 10px;
     margin: 0 1em 0 0;
+    font-size: 1.8rem;
 }
 
 /* To-Do Tasks Styling */
