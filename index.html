@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://kit.fontawesome.com/87161b5108.js" crossorigin="anonymous"></script>
+    <title>To Do List Application</title>
+</head>
+<body>
+    <!-- Header -->
+    <h1 class="title"><span class="material-symbols-outlined icon">
+        fact_check
+        </span>To Do List</h1>
+
+    <!-- Button Filter Section -->    
+    <div class="all-tasks">
+        <div class="date-filter">
+            <button class="btn-dates" data-all-tasks-button> <span class="material-symbols-outlined date all">
+                list_alt
+                </span>All Tasks</button>
+            <button class="btn-dates" data-today-button> <span class="material-symbols-outlined date today">
+                today
+                </span>Today</button>
+            <button class="btn-dates" data-this-week-button><span class="material-symbols-outlined date this-week">
+                date_range
+                </span>This Week</button>
+        </div>
+        
+        <!-- Projects Section -->
+        <h2 class="task-list-title">Projects</h2>
+        <ul class="task-list" data-projects>
+        </ul>
+        <span></span>
+        <form action="" data-new-project-form>
+            <input type="text" class="new-input project" 
+            placeholder="New Project Name" 
+            aria-label="New Project Name" data-new-project-input>
+            <button class="btn create">+</button>
+        </form>
+    </div>
+
+    <!-- To-Do Header Section -->
+    <div class="todo-list" data-list-display-container>
+        <div class="todo-header">
+            <h2 class="list-title" data-list-title>No Tasks<span> (Add a Project)</span></h2>
+            <p class="task-count" data-list-count>0 Tasks Remaining</p>
+        </div>
+
+    <!-- To-Do Tasks Section-->
+        <div class="todo-body">
+        <div class="tasks" data-tasks></div>
+            <div class="new-task-creator">
+                <form action="" data-new-task-form style="display: none;">
+                    <input type="text" class="new-input task" 
+                    placeholder="New Task Name" 
+                    aria-label="New Task Name" data-new-task-input >
+                    <button class="btn create">+</button>
+                </form>
+            </div>
+            <div class="delete-task" data-delete-task style="display: none;">
+                <button class="btn delete" data-clear-complete-button>Clear Completed Tasks</button>
+                <button class="btn delete" data-delete-list-button>Delete Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Template -->
+    <template id="task-template">
+        <div class="task">
+            <input type="checkbox">
+            <label>
+                <span class="custom-checkbox"></span>
+            </label>
+            <div class="due-date">
+                <label class="label-due-date">Due Date:</label>
+                <input type="date" class="input-due-date">
+              </div>
+        </div>
+    </template>
+    <script src="./main.js"></script>
+    <!--Footer Section-->
+<footer>
+    <p>Copyright @ 
+        <script>document.write(new Date().getFullYear())</script> 
+    Eternum101</p>
+    <a href="https://github.com/Eternum101" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+    </a>
+</footer>
+</body>
+</html>
