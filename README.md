@@ -1,6 +1,6 @@
 # To Do List
 
-View Demo
+🔗 [View Demo](https://eternum101.github.io/to-do-list/)
 
 ## Table of Contents
 - [About The Project](#about-the-project)
